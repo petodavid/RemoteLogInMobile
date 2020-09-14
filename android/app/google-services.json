@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "169847666234",
+    "firebase_url": "https://remotelogin-33dbe.firebaseio.com",
+    "project_id": "remotelogin-33dbe",
+    "storage_bucket": "remotelogin-33dbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169847666234:android:14c8218af35f9420056703",
+        "android_client_info": {
+          "package_name": "com.szte.RemoteLogIn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169847666234-nl4ds0tpup3c3rl34gpj5akcoiigfp59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.szte.RemoteLogIn",
+            "certificate_hash": "5a5ff7cf068a1e99f2c53ef7e61bc3149dbc8597"
+          }
+        },
+        {
+          "client_id": "169847666234-07fsq2nucklbo9it681d594mus9a5s7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHd3iTd3GDguyZ3SygxYLBddqf2D6dB88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169847666234-07fsq2nucklbo9it681d594mus9a5s7a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169847666234-8q91p039jr3lvnpo6dhb4s6svv7ufc8g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.szte.RemoteLogIn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

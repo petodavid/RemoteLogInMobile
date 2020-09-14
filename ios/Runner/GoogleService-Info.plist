@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>169847666234-8q91p039jr3lvnpo6dhb4s6svv7ufc8g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.169847666234-8q91p039jr3lvnpo6dhb4s6svv7ufc8g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCPFwvyPzfnuT1Wpjp-hmYSy8ZYCp2PbCQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>169847666234</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.szte.RemoteLogIn</string>
+	<key>PROJECT_ID</key>
+	<string>remotelogin-33dbe</string>
+	<key>STORAGE_BUCKET</key>
+	<string>remotelogin-33dbe.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:169847666234:ios:36d4603e385b1ebb056703</string>
+	<key>DATABASE_URL</key>
+	<string>https://remotelogin-33dbe.firebaseio.com</string>
+</dict>
+</plist>

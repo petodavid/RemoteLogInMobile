@@ -23,9 +23,9 @@ class DevicesPage extends StatelessWidget {
         child: Icon(FontAwesomeIcons.plus),
       ),
       body: StreamBuilder<DocumentSnapshot>(
-        stream: Firestore.instance
+        stream: FirebaseFirestore.instance
             .collection("user")
-            .document(googleSignIn.currentUser.id)
+            .doc(googleSignIn.currentUser.id)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.exists) {

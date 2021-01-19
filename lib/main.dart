@@ -1,4 +1,5 @@
 import 'package:RemoteLogIn/core/colors.dart';
+import 'package:RemoteLogIn/core/encrypter.dart';
 import 'package:RemoteLogIn/pages/device_is_not_supported.dart';
 import 'package:RemoteLogIn/pages/home_page.dart';
 import 'package:RemoteLogIn/pages/log_in_page.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  print(await Encrypt.encryptString('asd'));
   runApp(RemoteLogIn());
 }
 

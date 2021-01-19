@@ -43,12 +43,12 @@ class _QrScannerPageState extends State<QrScannerPage> {
     String myUserId = googleSignIn.currentUser.id;
     controller.scannedDataStream.listen((scanData) {
       controller.dispose();
-      Firestore.instance.collection("client").getDocuments().then(
+      FirebaseFirestore.instance.collection("client").get().then(
         (querySnapshot) {
-          var data = querySnapshot.documents;
+          var data = querySnapshot.docs;
           var iDs = data.map((e) => e.id);
           if (iDs.contains(scanData)) {
-            Firestore.instance.collection("user").document(myUserId).setData(
+            FirebaseFirestore.instance.collection("user").doc(myUserId).set(
               {
                 "clients": FieldValue.arrayUnion([scanData]),
               },

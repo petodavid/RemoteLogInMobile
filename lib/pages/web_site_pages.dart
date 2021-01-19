@@ -6,14 +6,14 @@ class WebSitesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection("page").snapshots(),
+      stream: FirebaseFirestore.instance.collection("page").snapshots(),
       builder: (context, snapshot) {
         return !snapshot.hasData
             ? Center(child: CircularProgressIndicator())
             : ListView.builder(
-                itemCount: snapshot.data.documents.length,
+                itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
-                  DocumentSnapshot data = snapshot.data.documents[index];
+                  DocumentSnapshot data = snapshot.data.docs[index];
                   return ListTile(
                     onTap: () {
                       Navigator.push(

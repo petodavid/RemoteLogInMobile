@@ -1,4 +1,5 @@
 import 'package:RemoteLogIn/core/colors.dart';
+import 'package:RemoteLogIn/core/encrypter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,38 +25,41 @@ class _SelectedWebSitePageState extends State<SelectedWebSitePage> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: KColors.appStartGradientColor,
-          onPressed: () async {
-            var localAuth = LocalAuthentication();
-            bool didAuthenticate = await localAuth.authenticateWithBiometrics(
-                localizedReason:
-                    'To open the webpage on your machine we need to first a authenticate you');
-            if (didAuthenticate) {
-              await Firestore.instance
-                  .collection("client")
-                  .document(selectedMachineId)
-                  .setData({
-                'page': widget.page,
-                'userName': username.text,
-                'password': password.text,
-              });
-            } else {
-              final snackBar = SnackBar(
-                content: Text('Authentication failed'),
-                backgroundColor: Colors.red,
-              );
-              Scaffold.of(context).showSnackBar(snackBar);
-            }
-          },
-          label: Row(
-            children: [
-              Icon(FontAwesomeIcons.desktop),
-              SizedBox(
-                width: 20,
-              ),
-              Text('Open on my machine')
-            ],
-          )),
+        backgroundColor: KColors.appStartGradientColor,
+        onPressed: () async {
+          var localAuth = LocalAuthentication();
+          bool didAuthenticate = await localAuth.authenticateWithBiometrics(
+              localizedReason:
+                  'To open the webpage on your machine, we need to a authenticate you first');
+          if (didAuthenticate) {
+            await FirebaseFirestore.instance
+                .collection("client")
+                .doc(selectedMachineId)
+                .set(
+              {
+                'page': await Encrypt.encryptString(widget.page),
+                'userName': await Encrypt.encryptString(username.text),
+                'password': await Encrypt.encryptString(password.text),
+              },
+            );
+          } else {
+            final snackBar = SnackBar(
+              content: Text('Authentication failed'),
+              backgroundColor: Colors.red,
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+          }
+        },
+        label: Row(
+          children: [
+            Icon(FontAwesomeIcons.desktop),
+            SizedBox(
+              width: 20,
+            ),
+            Text('Open on my machine')
+          ],
+        ),
+      ),
       appBar: AppBar(
         flexibleSpace: Ink(
           decoration: BoxDecoration(
@@ -81,21 +85,28 @@ class _SelectedWebSitePageState extends State<SelectedWebSitePage> {
               child: TextField(
                 controller: username,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(hintText: 'Email / Username'),
+                decoration: InputDecoration(
+                  hintText: 'Email / Username',
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             Expanded(
               child: TextField(
+                obscureText: true,
                 controller: password,
-                decoration: InputDecoration(hintText: 'Password'),
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             Expanded(
               flex: 2,
               child: StreamBuilder<DocumentSnapshot>(
-                stream: Firestore.instance
+                stream: FirebaseFirestore.instance
                     .collection("user")
-                    .document(googleSignIn.currentUser.id)
+                    .doc(googleSignIn.currentUser.id)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data.exists) {
@@ -113,11 +124,13 @@ class _SelectedWebSitePageState extends State<SelectedWebSitePage> {
                         return CheckboxListTile(
                           value: selectedMachineId == clientIds[index],
                           onChanged: (value) {
-                            setState(() {
-                              value
-                                  ? selectedMachineId = clientIds[index]
-                                  : selectedMachineId = null;
-                            });
+                            setState(
+                              () {
+                                value
+                                    ? selectedMachineId = clientIds[index]
+                                    : selectedMachineId = null;
+                              },
+                            );
                           },
                           title: Text(clientIds[index]),
                           secondary: Icon(
